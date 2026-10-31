@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Register vehicles, add maintenance records and see expenses - Smart Car Maintenance &amp; Expense Tracker">
+    <title>Tracker | Smart Car Maintenance &amp; Expense Tracker</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css.css">
+    <style>
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        .quick-nav ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
+        <map name="logo-map">
+            <area shape="rect" coords="0,0,260,80" href="about.html" alt="About us">
+        </map>
+        <div>
+            <h1 class="highlight-title">Smart Car Maintenance &amp; Expense Tracker</h1>
+            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and monitoring expenses.</p>
+        </div>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li class="has-sub">
+                <a href="tracker.html">Tracker &#9662;</a>
+                <ul class="submenu">
+                    <li><a href="tracker.html#add-vehicle">Register New Vehicle</a></li>
+                    <li><a href="tracker.html#add-maintenance">Add Maintenance Record</a></li>
+                    <li><a href="tracker.html#expenses">Expense Summary</a></li>
+                </ul>
+            </li>
+            <li><a href="about.html">About Us</a></li>
+            <li class="guest-only"><a href="login.html">Log In</a></li>
+            <li class="guest-only"><a href="signup.html">Sign Up</a></li>
+            <li class="user-only" hidden><span class="user-name" id="user-name"></span></li>
+            <li class="user-only" hidden><button type="button" class="link-button" id="logout">Log Out</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="quick-nav">
+            <h2>Quick Navigation:</h2>
+            <ul>
+                <li><a href="#add-vehicle">Register New Vehicle</a></li>
+                <li><a href="#add-maintenance">Add Maintenance Record</a></li>
+                <li><a href="#expenses">Expense Summary</a></li>
+            </ul>
+        </section>
+
+        <section id="add-vehicle">
+            <h2 class="highlight-title">1. Register New Vehicle</h2>
+            <form id="vehicle-form" autocomplete="on">
+                <input type="hidden" name="form_type" value="new_vehicle">
+
+                <p class="field">
+                    <label for="car_brand">Car Brand (e.g., BMW):</label>
+                    <input type="text" id="car_brand" name="car_brand" size="25" maxlength="30" placeholder="Enter brand" required>
+                </p>
+
+                <p class="field">
+                    <label for="car_year">Car Model (Year):</label>
+                    <input type="number" id="car_year" name="car_year" min="1990" max="2030" step="1" value="2016" required>
+                </p>
+
+                <p class="field">
+                    <label for="car_color">Preferred Vehicle Color:</label>
+                    <input type="color" id="car_color" name="car_color" value="#0000ff">
+                </p>
+
+                <p class="field">
+                    <label for="plate_number">Plate Number:</label>
+                    <input type="text" id="plate_number" name="plate_number" size="15" maxlength="10" placeholder="Enter plate number" required>
+                </p>
+
+                <p>
+                    <input type="submit" value="Save Vehicle">
+                    <input type="reset" value="Clear Fields">
+                </p>
+                <p class="msg" id="vehicle-msg" role="status"></p>
+            </form>
+
+            <div class="table-wrap">
+                <table class="data" id="vehicle-table" hidden>
+                    <caption>My Vehicles</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Plate</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vehicle-rows"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="add-maintenance">
+            <h2 class="highlight-title">2. Add Maintenance Record</h2>
+            <form id="record-form">
+                <input type="hidden" name="form_type" value="new_maintenance">
+
+                <p class="field">
+                    <label for="vehicle">Vehicle:</label>
+                    <select id="vehicle" name="vehicle">
+                        <option value="">Not specified</option>
+                    </select>
+                </p>
+
+                <p class="field">
+                    <label for="service_type">Service Type:</label>
+                    <select id="service_type" name="service_type">
+                        <option>Oil Change</option>
+                        <option>Tires</option>
+                        <option>Brakes</option>
+                        <option>Battery</option>
+                        <option>Periodic Inspection</option>
+                        <option>Other</option>
+                    </select>
+                </p>
+
+                <p class="field">
+                    <label for="service_date">Service Date:</label>
+                    <input type="date" id="service_date" name="service_date" required>
+                </p>
+
+                <p class="field">
+                    <label for="odometer">Odometer Reading (km):</label>
+                    <input type="number" id="odometer" name="odometer" min="0" step="1" required>
+                </p>
+
+                <p class="field">
+                    <label for="cost">Cost (SAR):</label>
+                    <input type="number" id="cost" name="cost" min="0" step="0.01" required>
+                </p>
+
+                <fieldset>
+                    <legend>Service Location:</legend>
+                    <label><input type="radio" name="service_location" value="dealer" checked> Dealer</label>
+                    <label><input type="radio" name="service_location" value="workshop"> Independent Workshop</label>
+                    <label><input type="radio" name="service_location" value="self"> Done by Myself</label>
+                </fieldset>
+
+                <p class="field">
+                    <label for="notes">Notes (workshop name, parts replaced, etc.):</label>
+                    <textarea id="notes" name="notes" rows="4" cols="40"></textarea>
+                </p>
+
+                <p>
+                    <input type="submit" value="Save Record">
+                    <input type="reset" value="Clear Fields">
+                </p>
+                <p class="msg" id="record-msg" role="status"></p>
+            </form>
+        </section>
+
+        <section id="expenses">
+            <h2 class="highlight-title">3. Expense Summary</h2>
+
+            <div class="table-wrap">
+                <table class="data">
+                    <caption id="expense-caption">Sample Maintenance Expenses (example data)</caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Service</th>
+                            <th scope="col">Vehicle</th>
+                            <th scope="col">Odometer (km)</th>
+                            <th scope="col">Cost (SAR)</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="expense-rows"></tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" scope="row">Total</th>
+                            <td id="expense-total" colspan="2">0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">&copy; 2026 Smart Car Tracker - All Rights Reserved for CPIS 358.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Embedded script: a service date cannot be in the future.
+        var now = new Date();
+        var today = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+        document.getElementById("service_date").max = today;
+    </script>
+</body>
+</html>

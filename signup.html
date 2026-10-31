@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create an account on Smart Car Maintenance &amp; Expense Tracker">
+    <title>Sign Up | Smart Car Maintenance &amp; Expense Tracker</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css.css">
+    <style>
+        .form-narrow input[type="email"],
+        .form-narrow input[type="password"],
+        .form-narrow input[type="text"] {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
+        <map name="logo-map">
+            <area shape="rect" coords="0,0,260,80" href="about.html" alt="About us">
+        </map>
+        <div>
+            <h1 class="highlight-title">Smart Car Maintenance &amp; Expense Tracker</h1>
+            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and monitoring expenses.</p>
+        </div>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li class="has-sub">
+                <a href="tracker.html">Tracker &#9662;</a>
+                <ul class="submenu">
+                    <li><a href="tracker.html#add-vehicle">Register New Vehicle</a></li>
+                    <li><a href="tracker.html#add-maintenance">Add Maintenance Record</a></li>
+                    <li><a href="tracker.html#expenses">Expense Summary</a></li>
+                </ul>
+            </li>
+            <li><a href="about.html">About Us</a></li>
+            <li class="guest-only"><a href="login.html">Log In</a></li>
+            <li class="guest-only"><a href="signup.html">Sign Up</a></li>
+            <li class="user-only" hidden><span class="user-name" id="user-name"></span></li>
+            <li class="user-only" hidden><button type="button" class="link-button" id="logout">Log Out</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="form-narrow">
+            <h2 class="highlight-title">Create Your Account</h2>
+            <form id="signup-form">
+                <p class="field">
+                    <label for="full_name">Full Name:</label>
+                    <input type="text" id="full_name" name="full_name" maxlength="50" autocomplete="name" required autofocus>
+                </p>
+
+                <p class="field">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </p>
+
+                <p class="field">
+                    <label for="password">Password:</label>
+                    <input type="password" class="password" id="password" name="password" minlength="8" autocomplete="new-password" aria-describedby="password-help" required>
+                    <small id="password-help">At least 8 characters.</small>
+                </p>
+
+                <p class="field">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" class="password" id="confirm_password" name="confirm_password" minlength="8" autocomplete="new-password" required>
+                    <small id="match-help" aria-live="polite"></small>
+                </p>
+
+                <p class="field">
+                    <label style="font-weight: normal;"><input type="checkbox" class="show-password"> Show passwords</label>
+                </p>
+
+                <p><input type="submit" value="Sign Up"></p>
+                <p class="msg" id="signup-msg" role="alert"></p>
+            </form>
+            <p>Already have an account? <a href="login.html">Log in</a></p>
+            <p class="note">This is a student demo. Accounts are saved only in this browser, so please do not use a real password.</p>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">&copy; 2026 Smart Car Tracker - All Rights Reserved for CPIS 358.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Embedded script: tells the user right away if the two passwords differ.
+        var form = document.getElementById("signup-form");
+        var matchHelp = document.getElementById("match-help");
+
+        function checkMatch() {
+            if (form.confirm_password.value === "") {
+                matchHelp.textContent = "";
+            } else if (form.password.value === form.confirm_password.value) {
+                matchHelp.textContent = "Passwords match.";
+            } else {
+                matchHelp.textContent = "Passwords do not match yet.";
+            }
+        }
+
+        form.password.addEventListener("input", checkMatch);
+        form.confirm_password.addEventListener("input", checkMatch);
+    </script>
+</body>
+</html>

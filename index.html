@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart Car Maintenance &amp; Expense Tracker - CPIS 358 Project">
+    <title>Home | Smart Car Maintenance &amp; Expense Tracker</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css.css">
+    <style>
+        .page-links a {
+            margin-right: 12px;
+        }
+
+        .cta {
+            background-color: #0056b3;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            color: white;
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
+        <map name="logo-map">
+            <area shape="rect" coords="0,0,260,80" href="about.html" alt="About us">
+        </map>
+        <div>
+            <h1 class="highlight-title">Smart Car Maintenance &amp; Expense Tracker</h1>
+            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and monitoring expenses.</p>
+        </div>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li class="has-sub">
+                <a href="tracker.html">Tracker &#9662;</a>
+                <ul class="submenu">
+                    <li><a href="tracker.html#add-vehicle">Register New Vehicle</a></li>
+                    <li><a href="tracker.html#add-maintenance">Add Maintenance Record</a></li>
+                    <li><a href="tracker.html#expenses">Expense Summary</a></li>
+                </ul>
+            </li>
+            <li><a href="about.html">About Us</a></li>
+            <li class="guest-only"><a href="login.html">Log In</a></li>
+            <li class="guest-only"><a href="signup.html">Sign Up</a></li>
+            <li class="user-only" hidden><span class="user-name" id="user-name"></span></li>
+            <li class="user-only" hidden><button type="button" class="link-button" id="logout">Log Out</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="hero">
+            <img src="images/hero.svg" alt="A car on the road beside a maintenance checklist" width="1000" height="320">
+            <p class="hero-badge" style="margin: 0;"><strong id="greeting">Welcome!</strong><br>Every service, invoice and kilometer of your car in one place.</p>
+        </div>
+
+        <section>
+            <h2 class="highlight-title">Your Tracker at a Glance</h2>
+            <ul class="stats">
+                <li><strong id="stat-vehicles">0</strong> vehicles registered</li>
+                <li><strong id="stat-records">0</strong> maintenance records</li>
+                <li><strong id="stat-cost">0</strong> SAR spent so far</li>
+            </ul>
+            <p class="page-links">On this page:
+                <a href="#about">About the System</a>
+                <a href="#benefits">Benefits</a>
+                <a href="#how">How It Works</a>
+            </p>
+        </section>
+
+        <section id="about">
+            <article>
+                <h2 class="highlight-title">About the System</h2>
+                <p>This system aims to solve the difficulty of tracking vehicle health records and periodic expenses by providing an organized web interface for logging invoices, oil changes, and calculation costs.</p>
+                <p>Most drivers keep paper invoices in the glove box and try to remember when the last oil change was. When the car needs service, or when it is time to sell it, that history is hard to find. Smart Car Tracker keeps it all in one simple website.</p>
+            </article>
+        </section>
+
+        <section id="benefits">
+            <article>
+                <h2 class="highlight-title">Benefits</h2>
+                <ul>
+                    <li><strong>One place:</strong> all your vehicles and their service history together.</li>
+                    <li><strong>Know your costs:</strong> see what your car costs you, with totals worked out for you.</li>
+                    <li><strong>Plan ahead:</strong> dates and odometer readings show when the next service is due.</li>
+                    <li><strong>Better resale:</strong> show a buyer a clear maintenance history.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="how">
+            <article>
+                <h2 class="highlight-title">How It Works</h2>
+                <ol>
+                    <li>Create a free account, or go straight to the tracker.</li>
+                    <li>Register your vehicle with its brand, year, color and plate number.</li>
+                    <li>Add a record after each service, with the date, odometer and cost.</li>
+                    <li>Check the Expense Summary to see everything you have spent.</li>
+                </ol>
+                <p><a class="cta" href="tracker.html">Open the Tracker</a></p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">&copy; 2026 Smart Car Tracker - All Rights Reserved for CPIS 358.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Embedded script: fills the home page summary from the saved data.
+        var session = getSession();
+        var records = readList(KEYS.records);
+
+        if (session) {
+            document.getElementById("greeting").textContent = "Welcome back, " + session.name + "!";
+        }
+        document.getElementById("stat-vehicles").textContent = readList(KEYS.vehicles).length;
+        document.getElementById("stat-records").textContent = records.length;
+        document.getElementById("stat-cost").textContent = formatNumber(totalCost(records));
+    </script>
+</body>
+</html>

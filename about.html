@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About the team behind Smart Car Maintenance &amp; Expense Tracker">
+    <title>About Us | Smart Car Maintenance &amp; Expense Tracker</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css.css">
+    <style>
+        #team table.data {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
+        <map name="logo-map">
+            <area shape="rect" coords="0,0,260,80" href="about.html" alt="About us">
+        </map>
+        <div>
+            <h1 class="highlight-title">Smart Car Maintenance &amp; Expense Tracker</h1>
+            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and monitoring expenses.</p>
+        </div>
+    </header>
+
+    <nav aria-label="Main menu">
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li class="has-sub">
+                <a href="tracker.html">Tracker &#9662;</a>
+                <ul class="submenu">
+                    <li><a href="tracker.html#add-vehicle">Register New Vehicle</a></li>
+                    <li><a href="tracker.html#add-maintenance">Add Maintenance Record</a></li>
+                    <li><a href="tracker.html#expenses">Expense Summary</a></li>
+                </ul>
+            </li>
+            <li><a href="about.html">About Us</a></li>
+            <li class="guest-only"><a href="login.html">Log In</a></li>
+            <li class="guest-only"><a href="signup.html">Sign Up</a></li>
+            <li class="user-only" hidden><span class="user-name" id="user-name"></span></li>
+            <li class="user-only" hidden><button type="button" class="link-button" id="logout">Log Out</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="mission">
+            <article>
+                <h2 class="highlight-title">About Us</h2>
+                <p>We are Information Systems students at King Abdulaziz University. We built Smart Car Tracker as our project for CPIS 358, Internet Applications &amp; Web Programming.</p>
+                <p>Our goal is simple: to give every car owner an easy way to keep maintenance records and expenses together, instead of losing them in paper invoices and memory.</p>
+                <p>For more academic details, visit <a href="https://www.kau.edu.sa" target="_blank" rel="noopener">King Abdulaziz University</a>.</p>
+            </article>
+        </section>
+
+        <section id="team">
+            <h2 class="highlight-title">Our Team</h2>
+            <div class="table-wrap">
+                <table class="data">
+                    <caption>Project Group Members</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Section</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Saud Alsufyani</td>
+                            <td>IS1</td>
+                        </tr>
+                        <tr>
+                            <td>Mohammed Houbani</td>
+                            <td>IS1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="tech">
+            <h2 class="highlight-title">How We Built It</h2>
+            <ul>
+                <li>HTML for the structure of the pages</li>
+                <li>CSS for the design, menus and layout</li>
+                <li>JavaScript for the forms, login and expense totals</li>
+                <li>Git and GitHub for teamwork: <a href="https://github.com/Mohammed-H611/CPIS358-project" target="_blank" rel="noopener">project repository</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p style="text-align: center;">&copy; 2026 Smart Car Tracker - All Rights Reserved for CPIS 358.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
