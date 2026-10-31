@@ -40,17 +40,17 @@
                 </ul>
             </li>
             <li><a href="about.html">About Us</a></li>
-            <li class="guest-only"><a href="login.html">Log In</a></li>
-            <li class="guest-only"><a href="signup.html">Sign Up</a></li>
-            <li class="user-only" hidden><span class="user-name" id="user-name"></span></li>
-            <li class="user-only" hidden><button type="button" class="link-button" id="logout">Log Out</button></li>
+            <li id="menu-login"><a href="login.html">Log In</a></li>
+            <li id="menu-signup"><a class="active" href="signup.html">Sign Up</a></li>
+            <li id="menu-user" style="display: none;"><span class="user-name" id="user-name"></span></li>
+            <li id="menu-logout" style="display: none;"><button type="button" class="link-button" onclick="logOut()">Log Out</button></li>
         </ul>
     </nav>
 
     <main>
         <section class="form-narrow">
             <h2 class="highlight-title">Create Your Account</h2>
-            <form id="signup-form">
+            <form id="signup-form" onsubmit="return signUp()">
                 <p class="field">
                     <label for="full_name">Full Name:</label>
                     <input type="text" id="full_name" name="full_name" maxlength="50" autocomplete="name" required autofocus>
@@ -63,18 +63,18 @@
 
                 <p class="field">
                     <label for="password">Password:</label>
-                    <input type="password" class="password" id="password" name="password" minlength="8" autocomplete="new-password" aria-describedby="password-help" required>
+                    <input type="password" id="password" name="password" minlength="8" onblur="checkMatch()" autocomplete="new-password" aria-describedby="password-help" required>
                     <small id="password-help">At least 8 characters.</small>
                 </p>
 
                 <p class="field">
                     <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" class="password" id="confirm_password" name="confirm_password" minlength="8" autocomplete="new-password" required>
+                    <input type="password" id="confirm_password" name="confirm_password" minlength="8" onblur="checkMatch()" autocomplete="new-password" required>
                     <small id="match-help" aria-live="polite"></small>
                 </p>
 
                 <p class="field">
-                    <label style="font-weight: normal;"><input type="checkbox" class="show-password"> Show passwords</label>
+                    <label style="font-weight: normal;"><input type="checkbox" id="show-password" onclick="togglePasswords()"> Show passwords</label>
                 </p>
 
                 <p><input type="submit" value="Sign Up"></p>
@@ -93,21 +93,19 @@
     <script src="script.js"></script>
     <script>
         // Embedded script: tells the user right away if the two passwords differ.
-        var form = document.getElementById("signup-form");
-        var matchHelp = document.getElementById("match-help");
-
         function checkMatch() {
-            if (form.confirm_password.value === "") {
-                matchHelp.textContent = "";
-            } else if (form.password.value === form.confirm_password.value) {
-                matchHelp.textContent = "Passwords match.";
+            var password = document.getElementById("password").value;
+            var confirmed = document.getElementById("confirm_password").value;
+            var matchHelp = document.getElementById("match-help");
+
+            if (confirmed == "") {
+                matchHelp.innerHTML = "";
+            } else if (password == confirmed) {
+                matchHelp.innerHTML = "Passwords match.";
             } else {
-                matchHelp.textContent = "Passwords do not match yet.";
+                matchHelp.innerHTML = "Passwords do not match yet.";
             }
         }
-
-        form.password.addEventListener("input", checkMatch);
-        form.confirm_password.addEventListener("input", checkMatch);
     </script>
 </body>
 </html>

@@ -288,16 +288,6 @@ input[type="reset"] {
     display: none;
 }
 
-.msg.ok {
-    background-color: #e6f4ea;
-    color: #1e6b34;
-}
-
-.msg.error {
-    background-color: #fdecea;
-    color: #a31515;
-}
-
 p.note {
     background-color: #fff8e1;
     border-left: 4px solid #e0a800;

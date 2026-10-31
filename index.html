@@ -38,7 +38,7 @@
 
     <nav aria-label="Main menu">
         <ul class="menu">
-            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="index.html">Home</a></li>
             <li class="has-sub">
                 <a href="tracker.html">Tracker &#9662;</a>
                 <ul class="submenu">
@@ -48,10 +48,10 @@
                 </ul>
             </li>
             <li><a href="about.html">About Us</a></li>
-            <li class="guest-only"><a href="login.html">Log In</a></li>
-            <li class="guest-only"><a href="signup.html">Sign Up</a></li>
-            <li class="user-only" hidden><span class="user-name" id="user-name"></span></li>
-            <li class="user-only" hidden><button type="button" class="link-button" id="logout">Log Out</button></li>
+            <li id="menu-login"><a href="login.html">Log In</a></li>
+            <li id="menu-signup"><a href="signup.html">Sign Up</a></li>
+            <li id="menu-user" style="display: none;"><span class="user-name" id="user-name"></span></li>
+            <li id="menu-logout" style="display: none;"><button type="button" class="link-button" onclick="logOut()">Log Out</button></li>
         </ul>
     </nav>
 
@@ -118,14 +118,14 @@
     <script>
         // Embedded script: fills the home page summary from the saved data.
         var session = getSession();
-        var records = readList(KEYS.records);
+        var records = readList(RECORDS_KEY);
 
-        if (session) {
-            document.getElementById("greeting").textContent = "Welcome back, " + session.name + "!";
+        if (session != null) {
+            document.getElementById("greeting").innerHTML = "Welcome back, " + safeText(session.name) + "!";
         }
-        document.getElementById("stat-vehicles").textContent = readList(KEYS.vehicles).length;
-        document.getElementById("stat-records").textContent = records.length;
-        document.getElementById("stat-cost").textContent = formatNumber(totalCost(records));
+        document.getElementById("stat-vehicles").innerHTML = readList(VEHICLES_KEY).length;
+        document.getElementById("stat-records").innerHTML = records.length;
+        document.getElementById("stat-cost").innerHTML = totalCost(records);
     </script>
 </body>
 </html>
