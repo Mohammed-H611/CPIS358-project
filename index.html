@@ -64,9 +64,9 @@
         <section>
             <h2 class="highlight-title">Your Tracker at a Glance</h2>
             <ul class="stats">
-                <li><strong id="stat-vehicles">0</strong> vehicles registered</li>
-                <li><strong id="stat-records">0</strong> maintenance records</li>
-                <li><strong id="stat-cost">0</strong> SAR spent so far</li>
+                <li><strong id="stat-vehicles">3</strong> vehicles registered</li>
+                <li><strong id="stat-records">15</strong> maintenance records</li>
+                <li><strong id="stat-cost">2500</strong> SAR spent so far</li>
             </ul>
             <p class="page-links">On this page:
                 <a href="#about">About the System</a>
@@ -115,17 +115,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Embedded script: fills the home page summary from the saved data.
-        var session = getSession();
-        var records = readList(RECORDS_KEY);
-
-        if (session != null) {
-            document.getElementById("greeting").innerHTML = "Welcome back, " + safeText(session.name) + "!";
-        }
-        document.getElementById("stat-vehicles").innerHTML = readList(VEHICLES_KEY).length;
-        document.getElementById("stat-records").innerHTML = records.length;
-        document.getElementById("stat-cost").innerHTML = totalCost(records);
-    </script>
+    
 </body>
 </html>

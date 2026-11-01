@@ -50,7 +50,7 @@
     <main>
         <section class="form-narrow">
             <h2 class="highlight-title">Log In</h2>
-            <form id="login-form" onsubmit="return logIn()">
+            <form onsubmit="return validateLogin()">
                 <p class="field">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" autocomplete="email" required autofocus>
@@ -80,7 +80,6 @@
 
     <script src="script.js"></script>
     <script>
-        // Embedded script: a logged-in user has no need for this page.
         if (getSession() != null) {
             window.location = "tracker.html";
         }

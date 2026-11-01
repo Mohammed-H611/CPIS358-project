@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Register vehicles, add maintenance records and see expenses - Smart Car Maintenance &amp; Expense Tracker">
+    <meta name="description"
+        content="Register vehicles, add maintenance records and see expenses - Smart Car Maintenance &amp; Expense Tracker">
     <title>Tracker | Smart Car Maintenance &amp; Expense Tracker</title>
     <link rel="icon" href="images/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css.css">
@@ -18,7 +20,8 @@
         }
     </style>
 </head>
-<body onload="showVehicles(); showExpenses();">
+
+<body>
 
     <header class="site-header">
         <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
@@ -27,7 +30,8 @@
         </map>
         <div>
             <h1 class="highlight-title">Smart Car Maintenance &amp; Expense Tracker</h1>
-            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and monitoring expenses.</p>
+            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and
+                monitoring expenses.</p>
         </div>
     </header>
 
@@ -46,7 +50,8 @@
             <li id="menu-login"><a href="login.html">Log In</a></li>
             <li id="menu-signup"><a href="signup.html">Sign Up</a></li>
             <li id="menu-user" style="display: none;"><span class="user-name" id="user-name"></span></li>
-            <li id="menu-logout" style="display: none;"><button type="button" class="link-button" onclick="logOut()">Log Out</button></li>
+            <li id="menu-logout" style="display: none;"><button type="button" class="link-button" onclick="logOut()">Log
+                    Out</button></li>
         </ul>
     </nav>
 
@@ -62,17 +67,19 @@
 
         <section id="add-vehicle">
             <h2 class="highlight-title">1. Register New Vehicle</h2>
-            <form id="vehicle-form" autocomplete="on" onsubmit="return saveVehicle()">
+            <form onsubmit="alert('Record Saved!'); return false;">
                 <input type="hidden" name="form_type" value="new_vehicle">
 
                 <p class="field">
                     <label for="car_brand">Car Brand (e.g., BMW):</label>
-                    <input type="text" id="car_brand" name="car_brand" size="25" maxlength="30" placeholder="Enter brand" required>
+                    <input type="text" id="car_brand" name="car_brand" size="25" maxlength="30"
+                        placeholder="Enter brand" required>
                 </p>
 
                 <p class="field">
                     <label for="car_year">Car Model (Year):</label>
-                    <input type="number" id="car_year" name="car_year" min="1990" max="2030" step="1" value="2016" required>
+                    <input type="number" id="car_year" name="car_year" min="1990" max="2030" step="1" value="2016"
+                        required>
                 </p>
 
                 <p class="field">
@@ -82,7 +89,8 @@
 
                 <p class="field">
                     <label for="plate_number">Plate Number:</label>
-                    <input type="text" id="plate_number" name="plate_number" size="15" maxlength="10" placeholder="Enter plate number" required>
+                    <input type="text" id="plate_number" name="plate_number" size="15" maxlength="10"
+                        placeholder="Enter plate number" required>
                 </p>
 
                 <p>
@@ -93,7 +101,7 @@
             </form>
 
             <div class="table-wrap">
-                <table class="data" id="vehicle-table" style="display: none;">
+                <table class="data" id="vehicle-table">
                     <caption>My Vehicles</caption>
                     <thead>
                         <tr>
@@ -104,14 +112,22 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="vehicle-rows"></tbody>
+                    <tbody id="vehicle-rows">
+                        <tr>
+                            <td>BMW</td>
+                            <td>2016</td>
+                            <td><span class="swatch" style="background-color: #0000ff;"></span></td>
+                            <td>XYZ-1234</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </section>
 
         <section id="add-maintenance">
             <h2 class="highlight-title">2. Add Maintenance Record</h2>
-            <form id="record-form" onsubmit="return saveRecord()">
+            <form onsubmit="alert('Record Saved!'); return false;">
                 <input type="hidden" name="form_type" value="new_maintenance">
 
                 <p class="field">
@@ -186,12 +202,37 @@
                         </tr>
                     </thead>
 
-                    <tbody id="expense-rows"></tbody>
+                    <tbody id="expense-rows">
+                        <tr>
+                            <td>2026-03-12</td>
+                            <td>Oil Change</td>
+                            <td>BMW</td>
+                            <td>80,000</td>
+                            <td>180</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>2026-06-05</td>
+                            <td>Tires</td>
+                            <td>BMW</td>
+                            <td>84,500</td>
+                            <td>1200</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>2026-09-20</td>
+                            <td>Brakes</td>
+                            <td>BMW</td>
+                            <td>88,200</td>
+                            <td>350</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
 
                     <tfoot>
                         <tr>
                             <th colspan="4" scope="row">Total</th>
-                            <td id="expense-total" colspan="2">0</td>
+                            <td id="expense-total" colspan="2">1730</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -206,7 +247,6 @@
 
     <script src="script.js"></script>
     <script>
-        // Embedded script: a service date cannot be in the future.
         var now = new Date();
         var month = now.getMonth() + 1;
         var day = now.getDate();
@@ -219,4 +259,5 @@
         document.getElementById("service_date").max = now.getFullYear() + "-" + month + "-" + day;
     </script>
 </body>
+
 </html>

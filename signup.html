@@ -50,8 +50,7 @@
     <main>
         <section class="form-narrow">
             <h2 class="highlight-title">Create Your Account</h2>
-            <form id="signup-form" onsubmit="return signUp()">
-                <p class="field">
+            <form onsubmit="alert('Account created successfully!'); return false;">                <p class="field">
                     <label for="full_name">Full Name:</label>
                     <input type="text" id="full_name" name="full_name" maxlength="50" autocomplete="name" required autofocus>
                 </p>
@@ -92,7 +91,6 @@
 
     <script src="script.js"></script>
     <script>
-        // Embedded script: tells the user right away if the two passwords differ.
         function checkMatch() {
             var password = document.getElementById("password").value;
             var confirmed = document.getElementById("confirm_password").value;

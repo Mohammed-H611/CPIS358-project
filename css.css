@@ -18,7 +18,6 @@ img {
     border: 0;
 }
 
-/* Master page: the same header, menu and footer on every page */
 .site-header {
     align-items: center;
     background-color: white;
@@ -74,7 +73,6 @@ nav ul li a.active {
     border-radius: 5px;
 }
 
-/* Dropdown menu, layered above the page content */
 .submenu {
     background-color: #333;
     border-radius: 0 0 8px 8px;
@@ -142,7 +140,6 @@ section {
     text-shadow: 1px 1px 2px #ccc;
 }
 
-/* Home page banner: the badge is layered over the image */
 .hero {
     border-radius: 12px;
     margin: 20px;
