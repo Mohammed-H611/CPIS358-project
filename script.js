@@ -2,7 +2,8 @@ function validateLogin() {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var msg = document.getElementById("login-msg");
-    
+    var loginImg = document.getElementById("login-img");
+
     if (email === "" || password === "") {
         if (msg) {
             msg.innerHTML = "Please fill in all required fields.";
@@ -35,6 +36,23 @@ function validateLogin() {
         msg.style.color = "green";
         msg.style.backgroundColor = "#eef4fb";
     }
+
+   if (loginImg) {
+        loginImg.style.border = "3px solid green";
+        loginImg.style.boxShadow = "0 0 10px green";
+    }
+
     alert("Logged in successfully!");
     return false; 
+}
+function togglePasswords() {
+    var type = "password";
+    if (document.getElementById("show-password").checked) {
+        type = "text";
+    }
+    document.getElementById("password").type = type;
+    var confirmBox = document.getElementById("confirm_password");
+    if (confirmBox != null) {
+        confirmBox.type = type;
+    }
 }
