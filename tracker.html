@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Register vehicles, add maintenance records and see expenses - Smart Car Maintenance &amp; Expense Tracker">
+    <meta name="description" content="Register vehicles, add maintenance records and see expenses - Smart Car Maintenance &amp; Expense Tracker">
     <title>Tracker | Smart Car Maintenance &amp; Expense Tracker</title>
     <link rel="icon" href="images/logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css.css">
@@ -20,18 +18,16 @@
         }
     </style>
 </head>
-
-<body>
+<body onload="showVehicles(); showExpenses();">
 
     <header class="site-header">
-        <img src="logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
+        <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
         <map name="logo-map">
             <area shape="rect" coords="0,0,260,80" href="about.html" alt="About us">
         </map>
         <div>
             <h1 class="highlight-title">Smart Car Maintenance &amp; Expense Tracker</h1>
-            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and
-                monitoring expenses.</p>
+            <p><strong>Centralized Web Platform</strong> for managing personal vehicles, tracking maintenance logs, and monitoring expenses.</p>
         </div>
     </header>
 
@@ -44,14 +40,14 @@
                     <li><a href="tracker.html#add-vehicle">Register New Vehicle</a></li>
                     <li><a href="tracker.html#add-maintenance">Add Maintenance Record</a></li>
                     <li><a href="tracker.html#expenses">Expense Summary</a></li>
+                    <li><a href="tracker.html#reminders">Service Reminders</a></li>
                 </ul>
             </li>
             <li><a href="about.html">About Us</a></li>
             <li id="menu-login"><a href="login.html">Log In</a></li>
             <li id="menu-signup"><a href="signup.html">Sign Up</a></li>
             <li id="menu-user" style="display: none;"><span class="user-name" id="user-name"></span></li>
-            <li id="menu-logout" style="display: none;"><button type="button" class="link-button" onclick="logOut()">Log
-                    Out</button></li>
+            <li id="menu-logout" style="display: none;"><button type="button" class="link-button" onclick="logOut()">Log Out</button></li>
         </ul>
     </nav>
 
@@ -62,24 +58,25 @@
                 <li><a href="#add-vehicle">Register New Vehicle</a></li>
                 <li><a href="#add-maintenance">Add Maintenance Record</a></li>
                 <li><a href="#expenses">Expense Summary</a></li>
+                <li><a href="#reminders">Service Reminders</a></li>
             </ul>
         </section>
 
         <section id="add-vehicle">
             <h2 class="highlight-title">1. Register New Vehicle</h2>
-            <form onsubmit="alert('Record Saved!'); return false;">
+            <form id="vehicle-form" autocomplete="on" onsubmit="return saveVehicle()" onreset="clearErrors(VEHICLE_FIELDS, 'vehicle-msg')">
                 <input type="hidden" name="form_type" value="new_vehicle">
 
                 <p class="field">
                     <label for="car_brand">Car Brand (e.g., BMW):</label>
-                    <input type="text" id="car_brand" name="car_brand" size="25" maxlength="30"
-                        placeholder="Enter brand" required>
+                    <input type="text" id="car_brand" name="car_brand" size="25" maxlength="30" placeholder="Enter brand" required onfocus="clearFieldError('car_brand')">
+                    <span class="error-text" id="car_brand-error"></span>
                 </p>
 
                 <p class="field">
                     <label for="car_year">Car Model (Year):</label>
-                    <input type="number" id="car_year" name="car_year" min="1990" max="2030" step="1" value="2016"
-                        required>
+                    <input type="number" id="car_year" name="car_year" min="1990" max="2030" step="1" value="2016" required onfocus="clearFieldError('car_year')">
+                    <span class="error-text" id="car_year-error"></span>
                 </p>
 
                 <p class="field">
@@ -89,19 +86,19 @@
 
                 <p class="field">
                     <label for="plate_number">Plate Number:</label>
-                    <input type="text" id="plate_number" name="plate_number" size="15" maxlength="10"
-                        placeholder="Enter plate number" required>
+                    <input type="text" id="plate_number" name="plate_number" size="15" maxlength="10" placeholder="Enter plate number" required onfocus="clearFieldError('plate_number')">
+                    <span class="error-text" id="plate_number-error"></span>
                 </p>
 
                 <p>
-                    <input type="submit" value="Save Vehicle">
+                    <input type="submit" value="Save Vehicle" formnovalidate>
                     <input type="reset" value="Clear Fields">
                 </p>
                 <p class="msg" id="vehicle-msg" role="status"></p>
             </form>
 
             <div class="table-wrap">
-                <table class="data" id="vehicle-table">
+                <table class="data" id="vehicle-table" style="display: none;">
                     <caption>My Vehicles</caption>
                     <thead>
                         <tr>
@@ -112,22 +109,14 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="vehicle-rows">
-                        <tr>
-                            <td>BMW</td>
-                            <td>2016</td>
-                            <td><span class="swatch" style="background-color: #0000ff;"></span></td>
-                            <td>XYZ-1234</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="vehicle-rows"></tbody>
                 </table>
             </div>
         </section>
 
         <section id="add-maintenance">
             <h2 class="highlight-title">2. Add Maintenance Record</h2>
-            <form onsubmit="alert('Record Saved!'); return false;">
+            <form id="record-form" onsubmit="return saveRecord()" onreset="resetRecordForm()">
                 <input type="hidden" name="form_type" value="new_maintenance">
 
                 <p class="field">
@@ -139,7 +128,7 @@
 
                 <p class="field">
                     <label for="service_type">Service Type:</label>
-                    <select id="service_type" name="service_type">
+                    <select id="service_type" name="service_type" onchange="showServicePicture()">
                         <option>Oil Change</option>
                         <option>Tires</option>
                         <option>Brakes</option>
@@ -149,19 +138,27 @@
                     </select>
                 </p>
 
+                <p class="service-box">
+                    <img id="service-picture" src="images/tip-oil.svg" alt="Oil Change" width="150" height="90">
+                    <span id="service-hint">Oil Change is usually needed every 5000 km.</span>
+                </p>
+
                 <p class="field">
                     <label for="service_date">Service Date:</label>
-                    <input type="date" id="service_date" name="service_date" required>
+                    <input type="date" id="service_date" name="service_date" required onfocus="clearFieldError('service_date')">
+                    <span class="error-text" id="service_date-error"></span>
                 </p>
 
                 <p class="field">
                     <label for="odometer">Odometer Reading (km):</label>
-                    <input type="number" id="odometer" name="odometer" min="0" step="1" required>
+                    <input type="number" id="odometer" name="odometer" min="0" step="1" required onfocus="clearFieldError('odometer')">
+                    <span class="error-text" id="odometer-error"></span>
                 </p>
 
                 <p class="field">
                     <label for="cost">Cost (SAR):</label>
-                    <input type="number" id="cost" name="cost" min="0" step="0.01" required>
+                    <input type="number" id="cost" name="cost" min="0" step="0.01" required onfocus="clearFieldError('cost')">
+                    <span class="error-text" id="cost-error"></span>
                 </p>
 
                 <fieldset>
@@ -177,7 +174,7 @@
                 </p>
 
                 <p>
-                    <input type="submit" value="Save Record">
+                    <input type="submit" value="Save Record" formnovalidate>
                     <input type="reset" value="Clear Fields">
                 </p>
                 <p class="msg" id="record-msg" role="status"></p>
@@ -202,41 +199,23 @@
                         </tr>
                     </thead>
 
-                    <tbody id="expense-rows">
-                        <tr>
-                            <td>2026-03-12</td>
-                            <td>Oil Change</td>
-                            <td>BMW</td>
-                            <td>80,000</td>
-                            <td>180</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>2026-06-05</td>
-                            <td>Tires</td>
-                            <td>BMW</td>
-                            <td>84,500</td>
-                            <td>1200</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>2026-09-20</td>
-                            <td>Brakes</td>
-                            <td>BMW</td>
-                            <td>88,200</td>
-                            <td>350</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="expense-rows"></tbody>
 
                     <tfoot>
                         <tr>
                             <th colspan="4" scope="row">Total</th>
-                            <td id="expense-total" colspan="2">1730</td>
+                            <td id="expense-total" colspan="2">0</td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
+            <p class="note" id="expense-note"></p>
+        </section>
+
+        <section id="reminders">
+            <h2 class="highlight-title">4. Service Reminders</h2>
+            <p>Your next services, worked out from your records and the highest odometer reading saved for each vehicle.</p>
+            <ul class="reminders" id="reminder-list"></ul>
         </section>
     </main>
 
@@ -247,17 +226,16 @@
 
     <script src="script.js"></script>
     <script>
-        var now = new Date();
-        var month = now.getMonth() + 1;
-        var day = now.getDate();
-        if (month < 10) {
-            month = "0" + month;
+        // Embedded script: the date and year pickers stop at today and next year.
+        document.getElementById("service_date").max = todayText();
+        document.getElementById("car_year").max = new Date().getFullYear() + 1;
+
+        // Called by onreset: clears the red marks and shows the first service picture again.
+        function resetRecordForm() {
+            clearErrors(RECORD_FIELDS, "record-msg");
+            document.getElementById("service_type").value = "Oil Change";
+            showServicePicture();
         }
-        if (day < 10) {
-            day = "0" + day;
-        }
-        document.getElementById("service_date").max = now.getFullYear() + "-" + month + "-" + day;
     </script>
 </body>
-
 </html>

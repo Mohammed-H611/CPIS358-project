@@ -18,6 +18,7 @@ img {
     border: 0;
 }
 
+/* Master page: the same header, menu and footer on every page */
 .site-header {
     align-items: center;
     background-color: white;
@@ -73,6 +74,7 @@ nav ul li a.active {
     border-radius: 5px;
 }
 
+/* Dropdown menu, layered above the page content */
 .submenu {
     background-color: #333;
     border-radius: 0 0 8px 8px;
@@ -140,6 +142,7 @@ section {
     text-shadow: 1px 1px 2px #ccc;
 }
 
+/* Home page banner: the badge is layered over the image */
 .hero {
     border-radius: 12px;
     margin: 20px;
@@ -285,6 +288,65 @@ input[type="reset"] {
     display: none;
 }
 
+.error-text {
+    color: #a31515;
+    display: block;
+    font-size: 0.9em;
+    margin-top: 3px;
+}
+
+/* Car Care Tips on the home page: the picture floats beside the text */
+.tip-box {
+    overflow: hidden;
+}
+
+.tip-box img {
+    border: 3px solid #ddd;
+    border-radius: 12px;
+    float: left;
+    height: auto;
+    margin: 0 20px 10px 0;
+    max-width: 100%;
+}
+
+.tip-count {
+    color: #555;
+}
+
+.tip-btn {
+    background-color: white;
+    border: 1px solid #0056b3;
+    border-radius: 8px;
+    color: #0056b3;
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.tip-btn:hover {
+    background-color: #eef4fb;
+}
+
+/* Picture that changes with the service type on the tracker page */
+.service-box img {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.reminders {
+    list-style: none;
+    padding: 0;
+}
+
+.reminders li {
+    background-color: #f8f9fa;
+    border-left: 5px solid #0056b3;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    padding: 10px 14px;
+}
+
 p.note {
     background-color: #fff8e1;
     border-left: 4px solid #e0a800;
@@ -375,6 +437,11 @@ footer {
 
     section {
         padding: 14px;
+    }
+
+    .tip-box img {
+        float: none;
+        margin-right: 0;
     }
 
     .hero-badge {
