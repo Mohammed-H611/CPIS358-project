@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Smart Car Maintenance &amp; Expense Tracker - CPIS 358 Project">
     <title>Home | Smart Car Maintenance &amp; Expense Tracker</title>
-    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css.css">
     <style>
         .page-links a {
@@ -26,7 +26,7 @@
 <body>
 
     <header class="site-header">
-        <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
+        <img src="logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
         <map name="logo-map">
             <area shape="rect" coords="0,0,260,80" href="about.html" alt="About us">
         </map>
@@ -58,7 +58,7 @@
 
     <main>
         <div class="hero">
-            <img src="images/hero.svg" alt="A car on the road beside a maintenance checklist" width="1000" height="320">
+            <img src="hero.svg" alt="A car on the road beside a maintenance checklist" width="1000" height="320">
             <p class="hero-badge" style="margin: 0;"><strong id="greeting">Welcome!</strong><br>Every service, invoice and kilometer of your car in one place.</p>
         </div>
 
@@ -100,7 +100,7 @@
         <section id="tips">
             <h2 class="highlight-title">Car Care Tips</h2>
             <div class="tip-box">
-                <img id="tip-image" src="images/tip-oil.svg" alt="Oil Change" width="400" height="240" onmouseover="highlightTip(true)" onmouseout="highlightTip(false)">
+                <img id="tip-image" src="tip-oil.svg" alt="Oil Change" width="400" height="240" onmouseover="highlightTip(true)" onmouseout="highlightTip(false)">
                 <h3 id="tip-title">Oil Change</h3>
                 <p id="tip-text">Change the engine oil about every 5000 km. Old oil gets thick and dirty, and the engine wears out faster.</p>
                 <p id="tip-count" class="tip-count">Tip 1 of 5</p>
@@ -133,7 +133,6 @@
 
     <script src="script.js"></script>
     <script>
-        // Embedded script: fills the home page summary from the saved data.
         var session = getSession();
         var records = readList(RECORDS_KEY);
 
@@ -144,7 +143,6 @@
         document.getElementById("stat-records").innerHTML = records.length;
         document.getElementById("stat-cost").innerHTML = totalCost(records);
 
-        // Car Care Tips: the Previous and Next buttons change the picture and the text.
         var tipTitles = ["Oil Change", "Tires", "Brakes", "Battery", "Periodic Inspection"];
         var tipTexts = [
             "Change the engine oil about every 5000 km. Old oil gets thick and dirty, and the engine wears out faster.",
@@ -170,7 +168,6 @@
             document.getElementById("tip-count").innerHTML = "Tip " + (tipNumber + 1) + " of " + tipTitles.length;
         }
 
-        // Called by onmouseover and onmouseout on the tip picture.
         function highlightTip(on) {
             var image = document.getElementById("tip-image");
             if (on) {

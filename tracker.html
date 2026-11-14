@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Register vehicles, add maintenance records and see expenses - Smart Car Maintenance &amp; Expense Tracker">
     <title>Tracker | Smart Car Maintenance &amp; Expense Tracker</title>
-    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css.css">
     <style>
         section {
@@ -21,7 +21,7 @@
 <body onload="showVehicles(); showExpenses();">
 
     <header class="site-header">
-        <img src="images/logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
+        <img src="logo.svg" alt="Smart Car Tracker logo" width="260" height="80" usemap="#logo-map">
         <map name="logo-map">
             <area shape="rect" coords="0,0,260,80" href="about.html" alt="About us">
         </map>
@@ -139,7 +139,7 @@
                 </p>
 
                 <p class="service-box">
-                    <img id="service-picture" src="images/tip-oil.svg" alt="Oil Change" width="150" height="90">
+                    <img id="service-picture" src="tip-oil.svg" alt="Oil Change" width="150" height="90">
                     <span id="service-hint">Oil Change is usually needed every 5000 km.</span>
                 </p>
 
@@ -226,11 +226,9 @@
 
     <script src="script.js"></script>
     <script>
-        // Embedded script: the date and year pickers stop at today and next year.
         document.getElementById("service_date").max = todayText();
         document.getElementById("car_year").max = new Date().getFullYear() + 1;
 
-        // Called by onreset: clears the red marks and shows the first service picture again.
         function resetRecordForm() {
             clearErrors(RECORD_FIELDS, "record-msg");
             document.getElementById("service_type").value = "Oil Change";
